@@ -1,0 +1,27 @@
+a.kinotracker_link {
+	color: hsl(200, 100%, 35%);
+	text-decoration: none;
+    margin: 0 5px;
+}
+
+a.kinotracker_link:hover {
+	color: hsl(200, 100%, 50%);
+}
+
+.kinotracker_block {
+    padding: 5px;
+    display: inline-block;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.kinotracker_block:hover {
+    background: #fff;
+    border-radius: 5px;
+}
+
+.kinotracker_img {
+    width: 16px;
+    height: 16px;
+}

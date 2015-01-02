@@ -1,0 +1,29 @@
+{
+	"name": "KinoTracker",
+	"description": "Kinopoisk + RuTracker",
+	"manifest_version": 2,
+	"version": "0.6",
+
+    "author": "Vladimir Kalinichev",
+
+    "short_name": "KinoTracker",
+
+	"content_scripts": [{
+		"matches":	["http://www.kinopoisk.ru/film/*"],
+		"css":		["css/kinotracker.css"],
+		"js":		["js/jquery.js", "js/kinotracker.js"]
+	}],
+
+	"background":	{"page":	"background.html"},
+	"icons":		{
+        "48":		"img/logo_48.png",
+        "128":		"img/logo_128.png"
+    },
+	"options_page": "options.html",
+
+	"browser_action": {
+		"default_title":	"KinoTracker",
+		"default_icon":		"img/popup_button.png",
+		"default_popup":	"popup.html"
+	}
+}
