@@ -10,7 +10,7 @@ html {
 
 body {
 	background: #f8f8f8;
-	background: -webkit-linear-gradient(top, #f8f8f8, #ddd);
+	background: linear-gradient(to bottom, #f8f8f8, #ddd);
 	border: 1px solid;
 	border-color: #aaa #888 #888 #aaa;
 	border-radius: 10px;
@@ -21,7 +21,7 @@ body {
 }
 
 button {
-	background: -webkit-linear-gradient(top, #aaa, #888);
+	background: linear-gradient(to bottom, #aaa, #888);
 	border: 1px solid #848484;
 	border-radius: 3px;
 	color: #f8f8f8;
@@ -34,12 +34,12 @@ button {
 }
 
 button:hover{
-	background: -webkit-linear-gradient(top, #b0b0b0, #8e8e8e);
+	background: linear-gradient(to bottom, #b0b0b0, #8e8e8e);
 	color: #fff;
 }
 
 button:active{
-	background: -webkit-linear-gradient(top, #b8b8b8, #909090);
+	background: linear-gradient(to bottom, #b8b8b8, #909090);
 	top: 1px;
 }
 
@@ -54,7 +54,8 @@ input[type=text] {
 	width: 200px;
 }
 
-input[type=text], select {
+input[type=text],
+select {
 	border: 1px solid;
 	border-color: #aaa #ddd #ddd #aaa;
 	border-radius: 2px;
@@ -94,14 +95,14 @@ div#buttons {
 	cursor: default;
 }
 
-#save         { background: -webkit-linear-gradient(top, hsl(120, 50%, 50%), hsl(120, 50%, 40%)); }
-#save:hover   { background: -webkit-linear-gradient(top, hsl(120, 50%, 55%), hsl(120, 50%, 45%)); }
-#save:active  { background: -webkit-linear-gradient(top, hsl(120, 50%, 52%), hsl(120, 50%, 42%)); }
+#save         { background: linear-gradient(to bottom, hsl(120, 50%, 50%), hsl(120, 50%, 40%)); }
+#save:hover   { background: linear-gradient(to bottom, hsl(120, 50%, 55%), hsl(120, 50%, 45%)); }
+#save:active  { background: linear-gradient(to bottom, hsl(120, 50%, 52%), hsl(120, 50%, 42%)); }
 
-#load         { background: -webkit-linear-gradient(top, hsl(220, 50%, 55%), hsl(220, 50%, 45%)); }
-#load:hover   { background: -webkit-linear-gradient(top, hsl(220, 50%, 60%), hsl(220, 50%, 50%)); }
-#load:active  { background: -webkit-linear-gradient(top, hsl(220, 50%, 57%), hsl(220, 50%, 47%)); }
+#load         { background: linear-gradient(to bottom, hsl(220, 50%, 55%), hsl(220, 50%, 45%)); }
+#load:hover   { background: linear-gradient(to bottom, hsl(220, 50%, 60%), hsl(220, 50%, 50%)); }
+#load:active  { background: linear-gradient(to bottom, hsl(220, 50%, 57%), hsl(220, 50%, 47%)); }
 
-#reset        { background: -webkit-linear-gradient(top, hsl(20, 50%, 52%), hsl(20, 50%, 42%)); }
-#reset:hover  { background: -webkit-linear-gradient(top, hsl(20, 50%, 57%), hsl(20, 50%, 47%)); }
-#reset:active { background: -webkit-linear-gradient(top, hsl(20, 50%, 55%), hsl(20, 50%, 45%)); }
+#reset        { background: linear-gradient(to bottom, hsl(20, 50%, 52%), hsl(20, 50%, 42%)); }
+#reset:hover  { background: linear-gradient(to bottom, hsl(20, 50%, 57%), hsl(20, 50%, 47%)); }
+#reset:active { background: linear-gradient(to bottom, hsl(20, 50%, 55%), hsl(20, 50%, 45%)); }
