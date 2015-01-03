@@ -9,7 +9,10 @@
     "short_name": "KinoTracker",
 
 	"content_scripts": [{
-		"matches":	["http://www.kinopoisk.ru/film/*"],
+		"matches":	[
+		  				"http://www.kinopoisk.ru/film/*",
+		  				"http://rutracker.org/forum/tracker.php?*",
+		  				"http://tapochek.net/tracker.php?*"],
 		"css":		["css/kinotracker.css"],
 		"js":		["js/jquery.js", "js/kinotracker.js"]
 	}],
