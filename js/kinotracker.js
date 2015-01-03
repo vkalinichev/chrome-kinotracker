@@ -25,7 +25,12 @@
             }
         },
 
-    link_template = '<a class="kinotracker_link" target="_blank" href="{{link}}"><img class="kinotracker_img" title="Искать на {{title}}" src="{{favicon}}"/></a>';
+    link_template = '' +
+        '<a class="kinotracker_link" target="_blank" href="{{link}}">' +
+            '<img class="kinotracker_img" title="Искать на {{title}}" src="{{favicon}}"/>' +
+        '</a>',
+
+    marker_template = '<span class="kinotracker_marked">{{marker}}</span>';
 
     load_props(props);
 
@@ -50,37 +55,45 @@
         htmlblock.append("<div class='kinotracker_block'>" + html + "</div>");
     }
 
-  function load_props(opt) {
-    chrome.extension.sendRequest(
-        opt,
-        function (resp) {
-          getAnswer(resp)
-        }
-    );
-  }
+    function load_props(opt) {
+        chrome.extension.sendRequest(
+            opt,
+            function (resp) {
+              getAnswer(resp)
+            }
+        );
+    }
 
-  function getAnswer(opt) {
-    var banned_chars = /"|«|»|\(ТВ\)|&|:|!|·|\(сериал\)/g,
-        mov_local_name = $('h1[itemprop=name]'),                                     // Блок названия на русском
-        mov_orig_name = $('span[itemprop=alternativeHeadline]').text(),              // Оригинальное название
-        year = $('table.info tr:first-of-type a:first-of-type').text(),              // Год выпуска
-        filmname = (mov_orig_name || mov_local_name.text()),
-        mov = filmname.replace(banned_chars, ''),    // Название фильма (оригинал/рус)
-        dyn_url = '?o=' + opt.Sort + '&s=' + opt.SortOrder + '&nm=' + mov + ' ' + year;
+    function getAnswer(opt) {
+        var banned_chars = /"|«|»|\(ТВ\)|&|:|!|·|\(сериал\)/g,
+            mov_local_name = $('h1[itemprop=name]'),                                     // Блок названия на русском
+            mov_orig_name = $('span[itemprop=alternativeHeadline]').text(),              // Оригинальное название
+            year = $('table.info tr:first-of-type a:first-of-type').text(),              // Год выпуска
+            filmname = (mov_orig_name || mov_local_name.text()),
+            mov = filmname.replace(banned_chars, ''),    // Название фильма (оригинал/рус)
+            marker = [mov_local_name.text(),mov_orig_name].join("&"),
+            dyn_url = '?o=' + opt.Sort + '&s=' + opt.SortOrder + '&nm=' + mov + ' ' + year;
 
-    opt.Tag = ( opt.AddTag === "true" ) ? opt.Tag : "";
+        opt.Tag = ( opt.AddTag === "true" ) ? opt.Tag : "";
 
-    addLinks(mov_local_name, dyn_url, opt.Tag, filmname);
-  }
+        addLinks(mov_local_name, dyn_url, opt.Tag, marker);
+    }
 
-        //console.log(links[location.hostname]);
     if (links[location.hostname]) {
-        var marker = location.hash.replace("#marker=", ""),
-            regexp = new RegExp(marker, "i");
+        var markers = location.hash.replace("#marker=", "").split("&");
 
         $(links[location.hostname].link_selector).each(function() {
-            var $this = $(this);
-            $this.html($this.html().replace(regexp, "<span class='kinotracker_marked'>" + marker + "</span>"))
+            var $this = $(this),
+                html = $this.html();
+
+            markers.forEach(function (element, index, array) {
+                var regexp = new RegExp(element, "i"),
+                    wrapped_marker = marker_template.split("{{marker}}").join(element);
+
+                html = html.replace(regexp, wrapped_marker);
+            });
+
+            $this.html(html)
         })
     }
 }());
