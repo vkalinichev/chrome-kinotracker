@@ -2,7 +2,7 @@
 	"name": "KinoTracker",
 	"description": "Kinopoisk + RuTracker",
 	"manifest_version": 2,
-	"version": "0.7.1",
+	"version": "0.7.2",
 
     "author": "Vladimir Kalinichev",
 
