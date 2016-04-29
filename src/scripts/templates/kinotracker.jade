@@ -1,0 +1,14 @@
+-var opts = "";
+= " "
+.kinotracker
+    span.kinotracker__label Скачать:
+
+    each link in links
+        if link.options && options
+            -opts = " " + options
+        a.kinotracker__link(
+            target="_blank"
+            href="#{link.static_url}#{clue}#{opts}#marker=#{marker}"
+            title="Искать на #{link.title}"
+        )
+            img.kinotracker__img( src="#{link.favicon}" )

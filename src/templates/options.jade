@@ -1,0 +1,49 @@
+doctype
+html
+
+    head
+        meta( charset="utf-8" )
+        link( type='text/css' href='options.css' rel='stylesheet' )
+        title KinoTracker
+        script( src='jquery.js' )
+        script( src='options.js' )
+
+        block optional_head
+
+    body
+        .header
+            img.logo( src='images/big_logo.png' )
+        .options
+            .option
+                label Упорядочить результаты по:
+            .option
+                select.js_sort( name="sort" )
+                    option( value="1") Дате регистрации
+                    option( value="2") Названию темы
+                    option( value="4") Количеству скачиваний
+                    option( value="10") Количеству сидов
+                    option( value="11") Количеству личей
+                    option( value="7") Размеру
+                    option( value="8") Дате посл. сообщения
+
+            .option
+                label
+                    input.js_sort_order( type="radio" name="sortorder" value="1" )
+                    | по возрастанию
+            .option
+                label
+                    input.js_sort_order( type="radio" name="sortorder" value="2" )
+                    | по убыванию
+
+            .option
+                input.js_checkbox_add_tag#add_tag( type='checkbox')
+                label( for='add_tag' ) &nbsp;Добавлять тег
+            .option
+                input.js_tag( type='text' value='')
+
+
+        .buttons
+            button.button.button_save.js_save_btn Save
+            button.button.button_load.js_load_btn Load
+            button.button.button_reset.js_reset_btn Reset
+
