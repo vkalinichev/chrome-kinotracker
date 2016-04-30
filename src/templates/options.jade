@@ -3,47 +3,58 @@ html
 
     head
         meta( charset="utf-8" )
+        meta( name="viewport" content="initial-scale=1.0, user-scalable=no" )
         link( type='text/css' href='options.css' rel='stylesheet' )
+        link( type='text/css' href='popup.css' rel='stylesheet' )
         title KinoTracker
         script( src='jquery.js' )
         script( src='options.js' )
 
         block optional_head
 
-    body
-        .header
-            img.logo( src='images/big_logo.png' )
-        .options
-            .option
-                label Упорядочить результаты по:
-            .option
-                select.js_sort( name="sort" )
-                    option( value="1") Дате регистрации
-                    option( value="2") Названию темы
-                    option( value="4") Количеству скачиваний
-                    option( value="10") Количеству сидов
-                    option( value="11") Количеству личей
-                    option( value="7") Размеру
-                    option( value="8") Дате посл. сообщения
+    body.options
+        .options__header
+            .options__logo
+                include ../icons/logo-kinotracker-big.svg
+        .options__list
+            .options__item
+                label.options__label.options__label_line Сортировать результаты
+                label.options__label= "по "
 
-            .option
-                label
-                    input.js_sort_order( type="radio" name="sortorder" value="1" )
-                    | по возрастанию
-            .option
-                label
-                    input.js_sort_order( type="radio" name="sortorder" value="2" )
-                    | по убыванию
+                .options__dropdown.dropdown.js_order.js_dropdown( data-value="2" )
+                    button.dropdown__toggle.js_dropdown_toggle убыванию
+                    .dropdown__list
+                        button.dropdown__item( data-value="1" ) возрастанию
+                        button.dropdown__item( data-value="2" ) убыванию
 
-            .option
-                input.js_checkbox_add_tag#add_tag( type='checkbox')
-                label( for='add_tag' ) &nbsp;Добавлять тег
-            .option
-                input.js_tag( type='text' value='')
+                label.options__label= " "
+
+                .options__dropdown.dropdown.js_sort.js_dropdown( data-value="7" )
+                    button.dropdown__toggle.js_dropdown_toggle размера
+                    .dropdown__list
+                        button.dropdown__item( data-value="1" ) даты
+                        button.dropdown__item( data-value="2" ) названия
+                        button.dropdown__item( data-value="4" ) скачиваний
+                        //button.dropdown__item( data-value="10" ) сидам
+                        //button.dropdown__item( data-value="11" ) личам
+                        button.dropdown__item( data-value="7" ) размера
+                        //button.dropdown__item( data-value="8" ) дате посл. сообщения
+
+            .options__item
+
+                label.checkbox
+                    input.checkbox__input.js_add_tag#add_tag( type='checkbox')
+                    .checkbox__mark
+                        include ../icons/checkbox.svg
+                    .checkbox__label &nbsp;Добавить теги
+                    .checkbox__label.checkbox__label_optional :
+
+                .options__item
+                    input.options__input.js_tag( type='text' placeholder='Добавить теги к каждому запросу' )
 
 
-        .buttons
-            button.button.button_save.js_save_btn Save
-            button.button.button_load.js_load_btn Load
-            button.button.button_reset.js_reset_btn Reset
+        .options__buttons
+            button.button.button_primary.js_save_btn Сохранить
+            button.button.button_lite.js_cancel_btn Отмена
+            //-button.button.button_reset.js_reset_btn Reset
 

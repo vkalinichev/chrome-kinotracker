@@ -84,7 +84,7 @@ gulp.task "zip", ->
 
 
 gulp.task "watch", ->
-    gulp.watch "./src/templates/**/*", ["templates"]
+    gulp.watch "./src/{icons,templates}/**/*", ["templates"]
     gulp.watch "./src/scripts/**/*", ["scripts"]
     gulp.watch "./src/styles/**/*",  ["styles"]
     gulp.watch "./src/images/**/*",  ["images"]

@@ -1,0 +1,58 @@
+.dropdown
+    $this = dropdown
+
+    position relative
+    display inline-block
+
+    &__toggle
+        font inherit
+        color #007FFF
+        background none
+        border dotted currentColor
+        border-width 0 0 1px
+
+        .{$this}_open &
+            border-bottom-color lighten( #007FFF, 66% )
+
+    &__list
+        display none
+
+        position absolute
+        //top -.3em
+        top 100%
+        margin-top -1px
+        z-index 1
+
+        background #fff
+        border-radius 2px
+        box-shadow:
+                0 0 0 0.8px hsla(0,0%,0%,.1) inset,
+                  0 1.5px 0 hsla(0,0%,0%,.1)
+
+        .{$this}_open &
+             display block
+
+    &__item
+        $color = #007FFF
+        display block
+        width 100%
+
+        padding .2em 8px .3em
+
+        background none
+        border none
+
+        text-align start
+        font inherit
+        white-space nowrap
+
+        &:hover
+            background hsla( $color, .1 )
+
+        &_active
+            display none
+            //background hsla( $color, .05 )
+            //color darken( #007FFF, 10% )
+
+            //&:hover
+            //    background hsla( $color, .14 )

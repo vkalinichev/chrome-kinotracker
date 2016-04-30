@@ -1,126 +1,217 @@
-*  
-	margin 0
-	padding 0
+$brand-color = #5651a2
+
+@import "blocks/dropdown"
+
+*
+    margin 0
+    padding 0
+
+    &
+    &:before
+    &:after
+        box-sizing inherit
+
+    &:disabled
+        cursor default
+        -webkit-user-select none
+
+        &[type=text]
+            display none
+
+    &:focus
+        outline none
 
 html
-	background #444
-	font-family Segoe UI, Arial, Helvetica, sans-serif
-	-webkit-user-drag none
-	-webkit-user-select none
+    background #fff
+    font-family Segoe UI, Arial, Helvetica, sans-serif
+    -webkit-user-drag none
+    -webkit-user-select none
+    cursor default
+    box-sizing border-box
+    display flex
+
+a
+button
+    cursor pointer
+
+    &:focus
+        outline none
+
+input[type=text]
+    position relative
+
+    display inline-block
+    width 100%
+
+    padding 8px
+
+    font-size .9em
+    border none
+    border-radius 3px
+
+    box-shadow 0 .8px hsla(0, 0%, 0%, .15) inset
 
 
-body  
-	background #f8f8f8 
-	background linear-gradient(to bottom, #f8f8f8, #ddd) 
-	border 1px solid 
-	border-color #aaa #888 #888 #aaa 
-	border-radius 10px 
-	box-shadow 2px 2px 10px hsla(0,0%,0%, .5) 
-	margin 50px auto 
-	padding 10px 
-	width 250px 
- 
+input::-webkit-input-placeholder
+    color #ccc
 
-button  
-	background linear-gradient(to bottom, #aaa, #888) 
-	border 1px solid #848484 
-	border-radius 3px 
-	color #f8f8f8 
-	padding 6px 15px 
-	position relative 
-	text-shadow 0 1px 0 #666 
-	margin 0 3px 
-	box-shadow 1px 1px 0 hsla(0,0%,100%,.5) inset, -1px -1px 0 hsla(0,0%,100%,.3) inset 
-	cursor pointer 
- 
+div#options > div
+    margin 0 auto
+    padding 2px 5px
+    width 220px
 
-	&:hover
-		background linear-gradient(to bottom, #b0b0b0, #8e8e8e)
-		color #fff
- 
+div#options
+    margin 0 auto
+    width 220px
 
-	&:active
-		background linear-gradient(to bottom, #b8b8b8, #909090)
-		top 1px
- 
+div#logo, div#buttons
+    margin-bottom 10px
+    text-align center
 
-input[type=checkbox]  
-	position relative 
-	top 2px 
- 
-
-input[type=text]  
-	padding 0 0 0 5px 
-	height 23px 
-	width 200px 
- 
-
-input[type=text],
-select  
-	border 1px solid 
-	border-color #aaa #ddd #ddd #aaa 
-	border-radius 2px 
-	font-size .8em 
-	position relative 
- 
-
-label  
-	color #333 
-	font-size .8em 
- 
-
-select  
-	width 208px 
-	height 25px 
-	top -1px 
-
- 
-
-div#options>div  
-	margin 0 auto 
-	padding 2px 5px 
-	width 220px 
- 
-
-div#options  
-	margin 0 auto 
-	width 220px 
- 
-
-div#logo, div#buttons  
-	margin-bottom 10px 
-	text-align center 
- 
-
-div#buttons  
-	cursor default 
- 
+div#buttons
+    cursor default
 
 .button
+    $offset = 2.3px
+    $padding = 7px 16px 6px
 
-	&_save
-		background linear-gradient(to bottom, hsl(120, 50%, 50%), hsl(120, 50%, 40%))
+    position relative
 
-		&:hover
-			background linear-gradient(to bottom, hsl(120, 50%, 55%), hsl(120, 50%, 45%))
+    margin 0
+    padding $padding
 
-		&:active
-			background linear-gradient(to bottom, hsl(120, 50%, 52%), hsl(120, 50%, 42%))
+    border none
 
-	&_load
-		background linear-gradient(to bottom, hsl(220, 50%, 55%), hsl(220, 50%, 45%))
+    font-size 12px
 
-		&:hover
-			background linear-gradient(to bottom, hsl(220, 50%, 60%), hsl(220, 50%, 50%))
+    transform translateY(0)
+    transition .07s 0s ease-in-out
+    transition-property transform, box-shadow
 
-		&:active
-			background linear-gradient(to bottom, hsl(220, 50%, 57%), hsl(220, 50%, 47%))
 
-	&_reset
-		background linear-gradient(to bottom, hsl(20, 50%, 52%), hsl(20, 50%, 42%))
+    &_primary
+        $color = #46C652
 
-		&:hover
-			background linear-gradient(to bottom, hsl(20, 50%, 57%), hsl(20, 50%, 47%))
+        background $color
+        color #fff
 
-		&:active
-			background linear-gradient(to bottom, hsl(20, 50%, 55%), hsl(20, 50%, 45%))
+        border-radius 3px
+        box-shadow:
+                0 $offset darken($color, 20%),
+                0 $offset* 1.75 hsla(0, 0%, 0%, .05)
+
+        &:active
+            transform translateY($offset)
+            box-shadow:
+                    0 0 darken($color, 20%),
+                    0 0 hsla(0, 0%, 0%, .07)
+
+    &_lite
+        background none
+        padding 0
+
+        color #666
+        will-change color, transform
+
+        &
+        &:active
+            box-shadow none
+
+        &.button
+            margin $padding
+
+        &:active
+            color #333
+            transform translateY(.8px)
+
+        & + &
+            margin 0 0 0 8px
+
+.options
+    background linear-gradient(to bottom, #fafafa, #f4f4f4)
+    border-radius 3px
+    box-shadow 0 0 35px -10px hsla(0, 0%, 0%, .5)
+    margin 50px auto
+    padding 16px 20px 20px
+    width 300px
+
+    &__logo
+        margin-bottom 16px
+        padding-bottom 8px
+
+        border-bottom .5px solid hsla( $brand-color, .1 )
+        text-align center
+
+        svg
+            width 200px
+
+    &__item
+        margin 8px 0
+
+        & + &
+            margin-top 16px
+
+    &__label
+        margin 0 0 8px
+
+        color #333
+
+        white-space nowrap
+
+        &_line
+            display block
+            margin 0 0 2px
+
+    &__buttons
+        margin-top 16px
+        padding-top 16px
+
+        border-top .5px solid hsla( $brand-color, .1 )
+        text-align center
+
+    &__dropdown .dropdown__list
+        left -8px
+
+.checkbox
+    $this = checkbox
+    $size = 15px
+    position relative
+
+    &__input
+        width 0
+        margin 0 $size + 4px 0 0
+
+        &:before
+            content ''
+            position absolute
+            top 1px
+            width $size
+            height $size
+
+            background #fff
+            border 1px solid #ccc
+            border-radius 2px
+
+    &__mark
+        opacity 0
+        width $size - 3
+        top 2px
+        left 2px
+        position absolute
+
+        .{$this}__input:checked ~ &
+            opacity 1
+
+    &__label
+        display inline-block
+        color #333
+        white-space nowrap
+        cursor pointer
+
+        &_optional
+            display none
+
+        .{$this}__input:checked ~ &
+            display inline-block
+
+
