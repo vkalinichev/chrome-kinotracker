@@ -1,0 +1,42 @@
+{
+    "SortResults": {
+        "message": "Сортировать результаты"
+    },
+    "SortBy": {
+        "message": "по"
+    },
+
+    "SortOrderAsc": {
+        "message": "по возрастанию"
+    },
+    "SortOrderDesc": {
+        "message": "по убыванию"
+    },
+
+    "SortByName": {
+        "message": "названию"
+    },
+    "SortBySize": {
+        "message": "размеру"
+    },
+    "SortByDownloads": {
+        "message": "скачиваниям"
+    },
+    "SortByDate": {
+        "message": "дате"
+    },
+
+    "AddTags": {
+        "message": "Добавить теги"
+    },
+    "TagsPlaceholder": {
+        "message": "Добавить теги к каждому поиску"
+    },
+
+    "Save": {
+        "message": "Сохранить"
+    },
+    "Cancel": {
+        "message": "Отмена"
+    }
+}

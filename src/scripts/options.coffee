@@ -1,3 +1,6 @@
+localize = ( key )->
+    chrome.i18n.getMessage key
+
 class OptionsView
 
     constructor: ->
@@ -6,28 +9,45 @@ class OptionsView
     initialize: ->
         @ui =
             dropdowns: $ ".js_dropdown"
+            togglers: $ ".js_toggler"
             addTag: $ ".js_add_tag"
             tag: $ ".js_tag"
             sort: $ ".js_sort"
             order: $ ".js_order"
 
+        @i18n =
+            texts: $ "[data-text]"
+            placeholders: $ "[data-placeholder]"
+            titles: $ "[data-title]"
+
+        @localize()
         @bindEvents()
         @getSettings()
+
+    localize: ->
+        @i18n.texts.each ->
+            @innerText = localize @dataset.text
+
+        @i18n.placeholders.each ->
+            @placeholder = localize @dataset.placeholder
+
+        @i18n.titles.each ->
+            @title = localize @dataset.title
 
 
     bindEvents: ->
         $ document
             .on "click", ".js_save_btn",  @setSettings.bind @
             .on "click", ".js_cancel_btn",  @closeWindow
-#            .on "click", ".js_reset_btn", @resetSettings.bind @
             .on "change", ".js_add_tag", @disableTag.bind @
+            .on "click", ".js_toggler", @togglerToggle.bind @
 
         $ ".js_dropdown"
             .on "click", ".js_dropdown_toggle", @dropdownToggle.bind @
             .on "click", "[data-value]", @dropdownSet.bind @
 
 
-    get: ( property, defaults )-> localStorage[property] or defaults
+    get: ( property, defaults )-> localStorage[ property ] or defaults
 
     set: ( property, value )-> localStorage[ property ] = value
 
@@ -37,8 +57,6 @@ class OptionsView
         , 150
 
     dropdownToggle: (event)->
-        console.log "dropdownToggle", event.delegateTarget
-
         $dropdown = $ event.delegateTarget
 
         $dropdown.toggleClass "dropdown_open"
@@ -48,7 +66,31 @@ class OptionsView
                 .one "mousedown", (event)->
                     if not $(event.target).closest( $dropdown ).length
                         $dropdown.removeClass "dropdown_open"
-                        
+
+    togglersInit: ->
+        self = @
+        @ui.togglers.each ->
+            @dataset.state = @dataset.value is @dataset.on
+            self.togglerUpdate @
+
+    togglerToggle: (event)->
+        toggler = event.currentTarget
+        data = toggler.dataset
+        data.state = data.state isnt "true"
+
+        @togglerUpdate toggler
+
+    togglerUpdate: (toggler)->
+        data = toggler.dataset
+        isOn = data.state is "true"
+        state = if isOn then "on" else "off"
+
+        data.value = data[ state ]
+        toggler.title = localize( data[ "#{state}Title" ] )
+
+        toggler.classList.toggle "toggler_on", isOn
+        toggler.classList.toggle "toggler_off", not isOn
+
 
     dropdownsInit: ->
         @ui.dropdowns.each ->
@@ -60,7 +102,6 @@ class OptionsView
                 .addClass "dropdown__item_active"
                 .siblings()
                     .removeClass "dropdown__item_active"
-#            $item.prependTo $item.parent()
 
             $toggle.text $item.text()
 
@@ -72,7 +113,6 @@ class OptionsView
             .addClass "dropdown__item_active"
             .siblings()
                 .removeClass "dropdown__item_active"
-#        $item.prependTo $item.parent()
 
         $toggle.text $item.text()
         $dropdown
@@ -83,6 +123,8 @@ class OptionsView
         @set "AddTag", @ui.addTag[0].checked
         @set "Tag",    @ui.tag.val()
         @set "Sort",   @ui.sort.data 'value'
+        @set "Order",  @ui.order[0].dataset.value
+
         @closeWindow()
 
     getSettings: ->
@@ -93,12 +135,13 @@ class OptionsView
             order: @get "Order", 2
 
         @ui.addTag[0].checked = settings.addTag
-        @disableTag()
         @ui.tag.val settings.tag
         @ui.sort.data 'value', settings.sort
-        @ui.order.data 'value', settings.order
-        @dropdownsInit()
+        @ui.order[0].dataset.value = settings.order
 
+        @disableTag()
+        @dropdownsInit()
+        @togglersInit()
 
     disableTag: ->
         @ui.tag[0].disabled = not @ui.addTag[0].checked

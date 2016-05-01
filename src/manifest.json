@@ -4,6 +4,9 @@
     "author": "Vladimir Kalinichev",
 
     "manifest_version": 2,
+
+    "default_locale": "ru",
+
     "content_scripts": [{
         "matches": [
             "http://www.kinopoisk.ru/film/*",
@@ -34,5 +37,5 @@
         "default_popup": "popup.html"
     },
 
-    "version": "0.8.1"
+    "version": "0.8.2"
 }

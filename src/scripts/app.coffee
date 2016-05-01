@@ -29,8 +29,6 @@ class Kinotracker
             options: options
             marker: filmname
 
-        console.log data
-
         @render data
 
     loadProperties: (options)->
@@ -69,17 +67,11 @@ class Kinotracker
                 $this = $ @
                 html = $this.html()
                 
-                console.log html
-                
-
                 markers.forEach (element)->
                     regexp = new RegExp element, "i"
                     marker = markerTemplate data: marker: element
 
-                    console.log regexp, marker
-
                     html = html.replace regexp, marker
-                    console.log html
 
                 $this.html html
 

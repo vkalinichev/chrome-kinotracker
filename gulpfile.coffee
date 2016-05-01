@@ -48,12 +48,22 @@ gulp.task "clean", ->
     del config.dest
 
 
+gulp.task "copy", [ "copy:vendor", "copy:locales", "copy:resources" ]
+
 gulp.task "copy:vendor", ->
     gulp.src "./src/scripts/vendor/**/*"
         .pipe gulp.dest config.dest
 
+gulp.task "copy:locales", ->
+    gulp.src "./src/_locales/**/*"
+        .pipe gulp.dest path.join config.dest, "_locales"
 
-gulp.task "scripts", ["copy:vendor"], ->
+gulp.task "copy:resources", ->
+    gulp.src "./src/*.json"
+    .pipe gulp.dest config.dest
+
+
+gulp.task "scripts", ["copy"], ->
     gulp.src [
         "./src/scripts/app.coffee"
         "./src/scripts/background.coffee"
@@ -71,11 +81,6 @@ gulp.task "images", ->
         .pipe gulp.dest path.join config.dest, "images"
 
 
-gulp.task "copy:resources", ->
-    gulp.src "./src/*.json"
-        .pipe gulp.dest config.dest
-
-
 gulp.task "zip", ->
     date = new Date
     gulp.src path.join config.dest, "**/*.{json,css,js,jpg,jpeg,png,gif}"
@@ -86,6 +91,7 @@ gulp.task "zip", ->
 gulp.task "watch", ->
     gulp.watch "./src/{icons,templates}/**/*", ["templates"]
     gulp.watch "./src/scripts/**/*", ["scripts"]
-    gulp.watch "./src/styles/**/*",  ["styles"]
+    gulp.watch "./src/{icons,styles}/**/*",  ["styles"]
     gulp.watch "./src/images/**/*",  ["images"]
     gulp.watch "./src/*.json", ["copy:resources"]
+    gulp.watch "./src/_locales/**/*", ["copy:locales"]

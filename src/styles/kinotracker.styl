@@ -4,11 +4,12 @@
     position relative
     display inline-block
 
-    top -2px
-    margin 0 0 -4px 5px
-    padding 4px 4px 4px 10px
+    top -1px
+    margin 0 0 -4px 4px
+    padding 3px 3px 3px 8px
 
     cursor default
+    animation bounceIn 1.3s infinite
 
 
     &:before
@@ -21,9 +22,10 @@
         bottom 0
 
         background-color #ff4e00
-        border-radius 5px
+        border-radius 3px
 
-        animation .3s bounceIn
+        animation bounceIn 1.3s
+
 
 
     &__link
@@ -31,7 +33,7 @@
         display inline-block
 
         margin 0
-        padding 3px
+        padding 2px
 
         color hsl(200, 100%, 35%)
         text-decoration none
@@ -42,7 +44,7 @@
         vertical-align middle
 
         & + &
-            margin 0 0 0 5px
+            margin 0 0 0 3px
 
         &:hover
             background hsla(0,0%,100%,1)

@@ -1,6 +1,7 @@
 $brand-color = #5651a2
 
 @import "blocks/dropdown"
+@import "blocks/toggler"
 
 *
     margin 0
@@ -29,6 +30,7 @@ html
     cursor default
     box-sizing border-box
     display flex
+    min-width 285px
 
 a
 button
@@ -133,7 +135,6 @@ div#buttons
     box-shadow 0 0 35px -10px hsla(0, 0%, 0%, .5)
     margin 50px auto
     padding 16px 20px 20px
-    width 300px
 
     &__logo
         margin-bottom 16px
@@ -147,9 +148,17 @@ div#buttons
 
     &__item
         margin 8px 0
+        white-space nowrap
 
         & + &
             margin-top 16px
+
+        &_inline
+            display inline-block
+            margin 0
+
+            & + &
+                margin 0
 
     &__label
         margin 0 0 8px

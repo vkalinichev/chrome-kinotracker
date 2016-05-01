@@ -1,0 +1,26 @@
+.toggler
+    $this = toggler
+
+    position relative
+    display inline-block
+
+    width 12px
+    height 8px
+    margin 0 0 0 2px
+
+    background embedurl("../../icons/arrow.svg") no-repeat center / 10px
+    border none
+
+    opacity .7
+
+    transition .1s transform, .07s opacity
+    will-change transform
+
+    &:hover
+        opacity 1
+
+    transform scale(1,-1)
+
+    &_off
+        transform scale(1)
+
