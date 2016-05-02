@@ -3,7 +3,7 @@ del = require "del"
 path = require "path"
 
 named = require "vinyl-named"
-
+_s = require "underscore.string"
 
 $ = require("gulp-load-plugins")()
 config = require "config"
@@ -83,8 +83,11 @@ gulp.task "images", ->
 
 gulp.task "zip", ->
     date = new Date
-    gulp.src path.join config.dest, "**/*.{json,css,js,jpg,jpeg,png,gif}"
-        .pipe $.zip( "#{date.getFullYear()}-#{date.getMonth()}-#{date.getDate()}.zip" )
+    day = _s.lpad date.getDate(), 2, "0"
+    month = _s.lpad date.getMonth() + 1, 2, "0"
+    year = date.getFullYear()
+    gulp.src path.join config.dest, "**/*.{json,css,html,js,jpg,jpeg,png,gif}"
+        .pipe $.zip( "#{year}-#{month}-#{day}.zip" )
         .pipe gulp.dest config.zip
 
 
