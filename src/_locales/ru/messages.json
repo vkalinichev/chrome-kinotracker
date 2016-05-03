@@ -1,4 +1,8 @@
 {
+    "GoToKinopoisk": {
+        "message": "Открыть КиноПоиск"
+    },
+
     "SortResults": {
         "message": "Сортировать результаты"
     },

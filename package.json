@@ -1,6 +1,6 @@
 {
   "name": "kinotracker",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Chrome extension for quick search movie torrents from kinopoisk",
   "dependencies": {
     "coffee": "^3.2.1",
