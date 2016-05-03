@@ -1,4 +1,8 @@
 {
+    "MinWindowWidth": {
+        "message": "285px"
+    },
+
     "GoToKinopoisk": {
         "message": "Открыть КиноПоиск"
     },
