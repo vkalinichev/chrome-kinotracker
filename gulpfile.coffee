@@ -132,11 +132,16 @@ gulp.task "upload", ->
     webStore = WebStore config.webstoreAccount
     webStore
         .uploadExisting( zipStream )
+
         .then ( response )->
             if response?[ "uploadState" ] is "SUCCESS"
                 console.log "Upload success"
             else
                 console.error "Upload failed"
+
+        .catch ( response )->
+            console.error "Upload failed:"
+            console.log response
 
 
 
