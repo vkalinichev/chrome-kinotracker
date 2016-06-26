@@ -9,9 +9,9 @@
 
     "content_scripts": [{
         "matches": [
-            "http://www.kinopoisk.ru/film/*",
-            "http://rutracker.org/forum/tracker.php?*",
-            "http://tapochek.net/tracker.php?*"
+            "*://www.kinopoisk.ru/film/*",
+            "*://rutracker.org/forum/tracker.php?*",
+            "*://tapochek.net/tracker.php?*"
         ],
         "css": [
             "kinotracker.css"
@@ -37,5 +37,5 @@
         "default_popup": "popup.html"
     },
 
-    "version": "0.8.5"
+    "version": "0.8.6"
 }
