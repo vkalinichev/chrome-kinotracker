@@ -1,6 +1,10 @@
-Thumbs.db
-
-.build
-.zip
 .idea
-*.zip
+.zip
+.src
+.build
+.deploy
+
+*.log
+
+config/local.*
+node_modules
