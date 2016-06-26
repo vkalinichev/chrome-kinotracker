@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vkalinichev/kinotracker.git"
+    "url": "git+https://github.com/vkalinichev/chrome-kinotracker.git"
   },
   "keywords": [
     "chrome",
@@ -47,9 +47,9 @@
   "author": "vkalinichev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vkalinichev/kinotracker/issues"
+    "url": "https://github.com/vkalinichev/chrome-kinotracker/issues"
   },
-  "homepage": "https://github.com/vkalinichev/kinotracker#readme",
+  "homepage": "https://github.com/vkalinichev/chrome-kinotracker#readme",
 
   "version": "0.8.6"
 }
