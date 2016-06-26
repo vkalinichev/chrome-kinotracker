@@ -9,10 +9,13 @@
   },
   "devDependencies": {
     "bem-jade": "^0.1.2",
+    "chrome-webstore-upload": "^0.2.0",
     "coffee-loader": "^0.7.2",
     "config": "^1.19.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-bump": "^2.1.0",
+    "gulp-debug": "^2.1.2",
     "gulp-imagemin": "^2.4.0",
     "gulp-jade": "^1.1.0",
     "gulp-livereload": "^3.8.1",
