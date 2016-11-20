@@ -5,8 +5,8 @@ module.exports =
 
     appname: _s.dasherize pkg.name
 
-    dest: './.build'
-    zip: './.zip'
+    build: './build'
+    release: './release'
 
 #    webstoreAccount:
 #        extensionId: "$extensionId"

@@ -37,7 +37,7 @@ gulp.task "release", $.sequence "bump", "build", "upload"
 # Prepares #
 
 gulp.task "clean", ->
-    del config.dest
+    del config.build
 
 
 
@@ -52,7 +52,7 @@ gulp.task "styles", ->
         .pipe $.plumber errorHandler
         .pipe $.stylus { compress: true }
         .pipe $.postcss [ postcssImportanter ]
-        .pipe gulp.dest config.dest
+        .pipe gulp.dest config.build
     
 gulp.task "templates", ->
     gulp.src [
@@ -62,26 +62,26 @@ gulp.task "templates", ->
     ]
         .pipe $.plumber errorHandler
         .pipe $.jade { pretty: false }
-        .pipe gulp.dest config.dest
+        .pipe gulp.dest config.build
 
 
 gulp.task "clean", ->
-    del config.dest
+    del config.build
 
 
 gulp.task "copy", [ "copy:vendor", "copy:locales", "copy:resources" ]
 
 gulp.task "copy:vendor", ->
     gulp.src "./src/scripts/vendor/**/*"
-        .pipe gulp.dest config.dest
+        .pipe gulp.dest config.build
 
 gulp.task "copy:locales", ->
     gulp.src "./src/_locales/**/*"
-        .pipe gulp.dest path.join config.dest, "_locales"
+        .pipe gulp.dest path.join config.build, "_locales"
 
 gulp.task "copy:resources", ->
     gulp.src "./src/*.json"
-        .pipe gulp.dest config.dest
+        .pipe gulp.dest config.build
 
 
 gulp.task "scripts", ["copy"], ->
@@ -93,13 +93,13 @@ gulp.task "scripts", ["copy"], ->
         .pipe $.plumber errorHandler
         .pipe named()
         .pipe webpackStream webpackConfig
-        .pipe gulp.dest config.dest
+        .pipe gulp.dest config.build
 
 
 gulp.task "images", ->
     gulp.src "./src/images/**/*"
         .pipe $.imagemin()
-        .pipe gulp.dest path.join config.dest, "images"
+        .pipe gulp.dest path.join config.build, "images"
 
 
 
@@ -121,12 +121,12 @@ gulp.task "bump:manifest.json", ->
 
 
 gulp.task "zip", ->
-    gulp.src path.join config.dest, "**/*.{json,css,js,html,jpg,jpeg,png,gif}"
+    gulp.src path.join config.build, "**/*.{json,css,js,html,jpg,jpeg,png,gif}"
         .pipe $.zip zipName()
-        .pipe gulp.dest config.zip
+        .pipe gulp.dest config.release
 
 gulp.task "upload", ->
-    filename = path.join config.zip, zipName()
+    filename = path.join config.release, zipName()
     zipStream = fs.createReadStream filename
 
     webStore = WebStore config.webstoreAccount

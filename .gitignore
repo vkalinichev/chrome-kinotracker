@@ -3,6 +3,8 @@
 .src
 .build
 .deploy
+build
+release
 
 *.log
 
