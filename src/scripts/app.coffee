@@ -17,10 +17,17 @@ class Kinotracker
     initialize: ->
         @loadProperties @properties
         @highlightMarkers()
+        @bindEvents()
 
     render: (data)->
         @el.append @template data
 
+    bindEvents: ->
+        document.addEventListener "mouseup", ->
+            selection = window.getSelection().toString()
+            fetch "https://www.kinopoisk.ru/search/handler-chromium-extensions?v=1&query=" + encodeURIComponent( selection )
+                .then ( res )-> res.json()
+                .then ( res )-> console.log( res )
 
     addLinks: (dyn_url, options, filmname)->
         data =
