@@ -1,0 +1,11 @@
+if data && !data.error
+    .kinotracker-bubble
+        .kinotracker-bubble__info
+            .kinotracker-bubble__header
+                span.kinotracker-bubble__title= data.rus ? data.rus : data.name
+                span.kinotracker-bubble__year= data.year
+            if data.rus && data.name
+                .kinotracker-bubble__name= data.name
+
+        if data.rating
+            .kinotracker-bubble__rating= data.rating

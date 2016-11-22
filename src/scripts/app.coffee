@@ -9,6 +9,7 @@ class Kinotracker
     links:          require './data/links'
     template:       require './templates/kinotracker'
     markerTemplate: require './templates/marker'
+    bubbleTemplate: require './templates/bubble'
 
     constructor: ->
         @el = $ 'h1[itemprop=name]'
@@ -23,11 +24,33 @@ class Kinotracker
         @el.append @template data
 
     bindEvents: ->
+        template = @bubbleTemplate
+
         document.addEventListener "mouseup", ->
             selection = window.getSelection().toString()
+            selectedRange = window.getSelection().getRangeAt( 0 ).cloneRange()
+            if selectedRange.startOffset is selectedRange.endOffset then return
+
             fetch "https://www.kinopoisk.ru/search/handler-chromium-extensions?v=1&query=" + encodeURIComponent( selection )
                 .then ( res )-> res.json()
-                .then ( res )-> console.log( res )
+                .then ( data )->
+                    selectedRangeRect = selectedRange.getBoundingClientRect()
+
+                    $bubble = $ template { data }
+
+                    $bubble.css
+                        top: selectedRangeRect.top + window.scrollY
+                        left: selectedRangeRect.right + window.scrollX
+
+                    $ document.body
+                        .append $bubble
+
+                    hideBubble = ->
+                        $bubble.remove()
+                        document.removeEventListener "mousedown", hideBubble
+
+                    document.addEventListener "mousedown", hideBubble
+
 
     addLinks: (dyn_url, options, filmname)->
         data =
