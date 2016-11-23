@@ -1,6 +1,6 @@
 if data && !data.error
     .kinotracker-bubble
-        .kinotracker-bubble__info
+        a.kinotracker-bubble__info( href='#' title='Открыть на КиноПоиске' )
             .kinotracker-bubble__header
                 span.kinotracker-bubble__title= data.rus ? data.rus : data.name
                 span.kinotracker-bubble__year= data.year
@@ -8,4 +8,8 @@ if data && !data.error
                 .kinotracker-bubble__name= data.name
 
         if data.rating
-            .kinotracker-bubble__rating= data.rating
+            -var ratingClass = ''
+            -if ( data.rating >= 7 ) ratingClass = 'kinotracker-bubble__rating_good'
+            -if ( data.rating <= 5 ) ratingClass = 'kinotracker-bubble__rating_good'
+            a.kinotracker-bubble__rating( class=ratingClass href='#' title='Искать на RuTracker.Org' )
+                = data.rating

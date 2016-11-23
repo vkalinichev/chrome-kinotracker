@@ -40,7 +40,7 @@ class Kinotracker
 
                     $bubble.css
                         top: selectedRangeRect.top + window.scrollY
-                        left: selectedRangeRect.right + window.scrollX
+                        left: Math.round( ( selectedRangeRect.left + selectedRangeRect.right )*.5 ) + window.scrollX
 
                     $ document.body
                         .append $bubble

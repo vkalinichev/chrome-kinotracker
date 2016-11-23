@@ -2,31 +2,71 @@
     position absolute
     display flex
 
-    margin -20px 4px 0
+    margin 0
+    transform translate( -50%, -100% )
+
+    font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
 
     background white
     border-radius 3px
-    box-shadow 1px 1px 4px -2px black
+    box-shadow 0 2px 0 hsla( black, .2 )
+
+    transition box-shadow .1s ease-in-out
+    overflow hidden
+
+    &:hover
+        box-shadow 0 1px 1px 2px hsla( black, .2 )
+
+    &:after
+        content ''
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
+        border-radius inherit
+        box-shadow 0 0 0 .5px hsla( black, .2 ) inset
+        pointer-events none
 
     &__info
-        padding 10px
+        padding 4px 8px
 
     &__header
-        margin-bottom 0px
+        margin-bottom 4px
 
     &__title
-        font-size 16px
+        font-size 14px
 
     &__name
-        font-size 14px
+        font-size 11px
         color #888
+        margin-bottom 4px
 
     &__year
         margin-left 8px
-        font-size 14px
+        font-size 11px
         color #888
 
     &__rating
-        padding 10px
-        background orange
+        display flex
+        align-items center
+
+        padding 10px 10px 12px
+
+        background #888
         color white
+
+        &:hover
+            background-color lighten( #888, 5% )
+
+        &_good
+            background-color #357920
+
+            &:hover
+                background-color lighten( #357920, 5% )
+
+        &_bad
+            background-color #ff0b0b
+
+            &:hover
+                background-color lighten( #ff0b0b, 5% )
