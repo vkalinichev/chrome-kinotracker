@@ -8,11 +8,7 @@
     "default_locale": "ru",
 
     "content_scripts": [{
-        "matches": [
-            "*://www.kinopoisk.ru/film/*",
-            "*://rutracker.org/forum/tracker.php?*",
-            "*://tapochek.net/tracker.php?*"
-        ],
+        "matches": [ "<all_urls>" ],
         "css": [
             "kinotracker.css"
         ],
@@ -37,5 +33,5 @@
         "default_popup": "popup.html"
     },
 
-    "version": "0.8.12"
+    "version": "1.0.0"
 }

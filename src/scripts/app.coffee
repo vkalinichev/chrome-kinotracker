@@ -25,6 +25,7 @@ class Kinotracker
 
     bindEvents: ->
         template = @bubbleTemplate
+        links = @links
 
         document.addEventListener "mouseup", ->
             selection = window.getSelection().toString()
@@ -36,7 +37,7 @@ class Kinotracker
                 .then ( data )->
                     selectedRangeRect = selectedRange.getBoundingClientRect()
 
-                    $bubble = $ template { data }
+                    $bubble = $ template { data, links }
 
                     $bubble.css
                         top: selectedRangeRect.top + window.scrollY
@@ -45,27 +46,28 @@ class Kinotracker
                     $ document.body
                         .append $bubble
 
-                    hideBubble = ->
-                        $bubble.remove()
-                        document.removeEventListener "mousedown", hideBubble
-
-                    document.addEventListener "mousedown", hideBubble
-
+#                    hideBubble = ->
+#                        document.removeEventListener "mousedown", hideBubble
+#                        setTimeout ->
+#                            $bubble.remove()
+#                        , 0
+#
+#                    document.addEventListener "mousedown", hideBubble
 
     addLinks: (dyn_url, options, filmname)->
-        data =
+        @linksData =
             links: @links
             clue: dyn_url
             options: options
             marker: filmname
 
-        @render data
+        @render @linksData
 
     loadProperties: (options)->
-        chrome.extension.sendRequest options, (response)=>
-            @getInfo response
+        if location.host isnt 'www.kinopoisk.ru' then return
+        chrome.extension.sendRequest options, @getInfo
 
-    getInfo: (opt)->
+    getInfo: (opt)=>
         banned_chars = /"|«|»|\(ТВ\)|&|:|!|·|\(сериал\)/g
 
         #mov_local_name = $('h1[itemprop=name]') # Блок названия на русском
