@@ -1,3 +1,5 @@
+{ findBestMatch } = require 'string-similarity'
+
 class Kinotracker
 
     properties:
@@ -35,6 +37,10 @@ class Kinotracker
             fetch "https://www.kinopoisk.ru/search/handler-chromium-extensions?v=1&query=" + encodeURIComponent( needle )
                 .then ( res )-> res.json()
                 .then ( data )->
+                    bestMatch = findBestMatch( needle, [ data.name, data.rus ] ).bestMatch
+
+                    if bestMatch.rating < .5 then return
+
                     selectedRangeRect = selectedRange.getBoundingClientRect()
 
                     $bubble = $ template { data, links }
