@@ -28,11 +28,11 @@ class Kinotracker
         links = @links
 
         document.addEventListener "mouseup", ->
-            selection = window.getSelection().toString()
+            needle = window.getSelection().toString()
             selectedRange = window.getSelection().getRangeAt( 0 ).cloneRange()
             if selectedRange.startOffset is selectedRange.endOffset then return
 
-            fetch "https://www.kinopoisk.ru/search/handler-chromium-extensions?v=1&query=" + encodeURIComponent( selection )
+            fetch "https://www.kinopoisk.ru/search/handler-chromium-extensions?v=1&query=" + encodeURIComponent( needle )
                 .then ( res )-> res.json()
                 .then ( data )->
                     selectedRangeRect = selectedRange.getBoundingClientRect()
@@ -46,13 +46,13 @@ class Kinotracker
                     $ document.body
                         .append $bubble
 
-#                    hideBubble = ->
-#                        document.removeEventListener "mousedown", hideBubble
-#                        setTimeout ->
-#                            $bubble.remove()
-#                        , 0
-#
-#                    document.addEventListener "mousedown", hideBubble
+                    onClickOutside = ->
+                        document.removeEventListener "mousedown", onClickOutside
+                        setTimeout ->
+                            $bubble.remove()
+                        , 0
+
+                    document.addEventListener "mousedown", onClickOutside
 
     addLinks: (dyn_url, options, filmname)->
         @linksData =
