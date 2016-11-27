@@ -1,5 +1,5 @@
 localize = ( key )->
-    chrome.i18n.getMessage key
+    chrome.i18n?.getMessage( key ) or key
 
 class OptionsView
 
