@@ -148,9 +148,9 @@ gulp.task "upload", ->
 # Watch #
 
 gulp.task "watch", ->
-    gulp.watch "./src/{icons,templates}/**/*", ["templates"]
+    gulp.watch "./src/{icons,templates,scripts}/**/*.{jade,svg}", ["templates"]
     gulp.watch "./src/scripts/**/*", ["scripts"]
-    gulp.watch "./src/{icons,styles}/**/*",  ["styles"]
-    gulp.watch "./src/images/**/*",  ["images"]
+    gulp.watch "./src/{icons,styles}/**/*", ["styles"]
+    gulp.watch "./src/images/**/*", ["images"]
     gulp.watch "./src/*.json", ["copy:resources"]
     gulp.watch "./src/_locales/**/*", ["copy:locales"]

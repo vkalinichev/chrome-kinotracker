@@ -1,21 +1,39 @@
+$root = "^[0]"
+$font-size = 12px
+$font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+
 .kinotracker-bubble
+    box-sizing border-box
+
     position absolute
-    display flex
+    left 100%
+    bottom 100%
+    display block
+    z-index 2147483647
 
+    min-height 24px
+    transform translateY( -100% )
     margin 0
-    transform translate( -50%, -100% )
 
-    font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+    font-family $font-family
+    font-size $font-size
 
-    background white
+    background linear-gradient( to bottom, #fff 35%, #eee 55% )
     border-radius 3px
-    box-shadow 0 2px 0 hsla( black, .2 )
+    box-shadow none
+    opacity .95
 
-    transition box-shadow .1s ease-in-out
-    overflow hidden
+    overflow visible
+    transition all .2s ease-in-out
+
+    *, *:before, *:after
+        box-sizing inherit
 
     &:hover
-        box-shadow 0 1px 1px 2px hsla( black, .2 )
+        background linear-gradient( to bottom, #fcfcfc, #f4f4f4 )
+        border-radius 0
+        box-shadow none
+        opacity 1
 
     &:after
         content ''
@@ -28,45 +46,129 @@
         box-shadow 0 0 0 .5px hsla( black, .2 ) inset
         pointer-events none
 
+    &__info-wrapper
+        position absolute
+        top 0
+        bottom 0
+        overflow hidden
+
+        &_left
+            left -200px
+            right 100%
+            white-space nowrap
+
+        &_right
+            right auto
+            left 100%
+
     &__info
+        position absolute
+        top 0
+        height 100%
+
         padding 4px 8px
+        text-decoration none
+
+        background white
+        color gray
+        box-shadow 0 0 0 .5px hsla( black, .2 ) inset
+
+        opacity 0
+
+        transition .2s ease-in-out
+        transition-property transform, opacity
+
+        {$root}:hover &
+            opacity 1
+
+        &_left
+            display inline-block
+
+            max-width 100%
+            overflow hidden
+            text-overflow ellipsis
+
+            right 0
+            border-radius 3px 0 0 3px
+            transform translateX( 100% )
+
+            {$root}:hover &
+                transform translateX( 1px )
+
+        &_right
+            position relative
+            transform translateX( -100% )
+            display flex
+            align-items center
+
+            border-radius 0 3px 3px 0
+            white-space nowrap
+
+            padding 0 4px
+
+            {$root}:hover &
+                transform translateX( -1px )
+
+    &__link
+        display inline-block
+        height 16px
+        margin 0 2px
+        opacity .9
+
+
+        transform scale3d( .99, .99, 1 )
+        transition .1s 0s ease-in-out
+        transition-property opacity, transform
+
+        //will-change opacity, transform
+        backface-visibility hidden
+
+        &:hover
+            opacity 1
+            transform scale3d( 1, 1, 1 )
+            transition-timing-function ease-in-out, cubic-bezier( .1, 20, .2, 20 )
 
     &__header
         margin-bottom 4px
 
     &__title
-        font-size 14px
+        color black
+        font-size inherit
 
     &__name
-        font-size 11px
         color #888
-        margin-bottom 4px
+        margin-left 4px
 
     &__year
-        margin-left 8px
-        font-size 11px
+        margin-left 4px
+        font-size .8em
         color #888
 
     &__rating
-        display flex
-        align-items center
+        display inline-block
+        padding 4px 6px
 
-        padding 10px 10px 12px
-
-        background #888
-        color white
+        color gray
+        text-decoration none
 
         &:hover
-            background-color lighten( #888, 5% )
+            background none
+            color lighten( #888, 5% )
 
         &_good
-            background-color #357920
+
+            background none
+            color #357920
 
             &:hover
-                background-color lighten( #357920, 5% )
+                background none
+                color lighten( #357920, 5% )
 
         &_bad
-            background-color #ff0b0b
+
+            background none
+            color darkred
 
             &:hover
-                background-color lighten( #ff0b0b, 5% )
+                background none
+                color lighten( #ff0b0b, 5% )

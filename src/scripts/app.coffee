@@ -32,7 +32,7 @@ class Kinotracker
         document.addEventListener "mouseup", ->
             needle = window.getSelection().toString()
             selectedRange = window.getSelection().getRangeAt( 0 ).cloneRange()
-            if selectedRange.startOffset is selectedRange.endOffset then return
+            if selectedRange.endOffset - selectedRange.startOffset <= 3  then return
 
             fetch "https://www.kinopoisk.ru/search/handler-chromium-extensions?v=1&query=" + encodeURIComponent( needle )
                 .then ( res )-> res.json()
@@ -45,9 +45,11 @@ class Kinotracker
 
                     $bubble = $ template { data, links }
 
-                    $bubble.css
-                        top: selectedRangeRect.top + window.scrollY
-                        left: Math.round( ( selectedRangeRect.left + selectedRangeRect.right )*.5 ) + window.scrollX
+                    left = selectedRangeRect.right + window.scrollX + "px"
+                    top = selectedRangeRect.top + window.scrollY + "px"
+
+                    $bubble[0].style.setProperty "left", left, "important"
+                    $bubble[0].style.setProperty "top", top, "important"
 
                     $ document.body
                         .append $bubble
