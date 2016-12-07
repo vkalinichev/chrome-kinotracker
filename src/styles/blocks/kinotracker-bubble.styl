@@ -1,6 +1,8 @@
 $root = "^[0]"
 $font-size = 12px
 $font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+$shadow-size = 4px
+$shadow-color = hsla( black, .1 )
 
 .kinotracker-bubble
     box-sizing border-box
@@ -11,7 +13,7 @@ $font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     display block
     z-index 2147483647
 
-    min-height 24px
+    min-height 23px
     transform translateY( -100% )
     margin 0
 
@@ -48,9 +50,10 @@ $font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
 
     &__info-wrapper
         position absolute
-        top 0
-        bottom 0
+        top -($shadow-size)
+        bottom -($shadow-size)
         overflow hidden
+        pointer-events none
 
         &_left
             left -200px
@@ -63,23 +66,30 @@ $font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
 
     &__info
         position absolute
-        top 0
-        height 100%
+        top $shadow-size
+        height "calc( 100% - %s )" % ($shadow-size*2)
 
         padding 4px 8px
         text-decoration none
 
         background white
         color gray
-        box-shadow 0 0 0 .5px hsla( black, .2 ) inset
+        box-shadow:
+            0 0 0 .5px hsla( black, .2 ) inset,
+            0 0 $shadow-size 0 transparent
 
         opacity 0
 
         transition .2s ease-in-out
         transition-property transform, opacity
 
+        pointer-events initial
+
         {$root}:hover &
             opacity 1
+            box-shadow:
+                0 0 0 .5px hsla( black, .2 ) inset,
+                0 0 $shadow-size 0 $shadow-color
 
         &_left
             display inline-block
@@ -150,10 +160,16 @@ $font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
 
         color gray
         text-decoration none
+        box-shadow 0 0 $shadow-size 0 transparent
+
+        transition box-shadow .07s 0s ease-in-out
 
         &:hover
             background none
             color lighten( #888, 5% )
+
+        {$root}:hover &
+            box-shadow 0 0 $shadow-size 0 $shadow-color
 
         &_good
 
