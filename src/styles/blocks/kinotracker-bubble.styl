@@ -27,7 +27,8 @@ $border-radius = 12px
     opacity .95
 
     overflow visible
-    transition all .15s ease-in-out
+    transition .075s 0s ease-in-out
+    transition-property border-radius, opacity
 
     *, *:before, *:after
         box-sizing inherit
@@ -35,7 +36,6 @@ $border-radius = 12px
     &:hover
         background linear-gradient( to bottom, #fcfcfc, #f4f4f4 )
         border-radius 0
-        box-shadow none
         opacity 1
 
     &_without-links
@@ -75,7 +75,7 @@ $border-radius = 12px
         height "calc( 100% - %s )" % ($shadow-size*2)
 
         padding 4px 8px
-        text-decoration none
+        text-decoration none !important
 
         background white
         color gray
@@ -128,24 +128,18 @@ $border-radius = 12px
         display inline-block
         height 16px
         margin 0 2px
-        opacity .9
-
-
-        transform scale3d( .99, .99, 1 )
-        transition .1s 0s ease-in-out
-        transition-property opacity, transform
-
-        backface-visibility hidden
 
         &:hover
-            opacity 1
-            transform scale3d( 1, 1, 1 )
-            transition-timing-function ease-in-out, cubic-bezier( .1, 20, .2, 20 )
+            animation .15s bounce10
 
     &__header
         display flex
         align-items baseline
         margin-bottom 4px
+        opacity .9
+
+        {$root}__info:hover &
+            animation .15s bounce05
 
     &__title
         overflow hidden
@@ -164,10 +158,10 @@ $border-radius = 12px
 
     &__rating
         display inline-block
-        padding 4px 6px
+        padding 4px 5px
 
-        color gray
-        text-decoration none
+        color #666
+        text-decoration none !important
         border-radius inherit
         box-shadow 0 0 $shadow-size 0 transparent
         white-space nowrap
@@ -178,6 +172,7 @@ $border-radius = 12px
         &:hover
             background none
             color lighten( @color, 5% )
+            animation .15s bounce05
 
         {$root}:hover &
             box-shadow 0 0 $shadow-size 0 $shadow-color
@@ -214,3 +209,13 @@ $border-radius = 12px
         margin-bottom -2px
 
         background transparent url( 'chrome-extension://__MSG_@@extension_id__/images/logo_48.png' ) center / 100%
+
+
+
+@keyframes bounce05
+    33%
+        transform scale( 1.05 )
+
+@keyframes bounce10
+    33%
+        transform scale( 1.1 )
