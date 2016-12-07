@@ -3,6 +3,7 @@ $font-size = 12px
 $font-family = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
 $shadow-size = 4px
 $shadow-color = hsla( black, .1 )
+$border-radius = 12px
 
 .kinotracker-bubble
     box-sizing border-box
@@ -15,18 +16,18 @@ $shadow-color = hsla( black, .1 )
 
     min-height 23px
     transform translateY( -100% )
-    margin 0
+    margin -4px 4px
 
     font-family $font-family
     font-size $font-size
 
     background linear-gradient( to bottom, #fff 35%, #eee 55% )
-    border-radius 3px
+    border-radius $border-radius
     box-shadow none
     opacity .95
 
     overflow visible
-    transition all .2s ease-in-out
+    transition all .15s ease-in-out
 
     *, *:before, *:after
         box-sizing inherit
@@ -37,6 +38,10 @@ $shadow-color = hsla( black, .1 )
         box-shadow none
         opacity 1
 
+    &_without-links
+        &:hover
+            border-radius 0 $border-radius $border-radius 0
+
     &:after
         content ''
         position absolute
@@ -45,7 +50,7 @@ $shadow-color = hsla( black, .1 )
         right 0
         bottom 0
         border-radius inherit
-        box-shadow 0 0 0 .5px hsla( black, .2 ) inset
+        box-shadow 0 0 0 .5px hsla( black, .15 ) inset
         pointer-events none
 
     &__info-wrapper
@@ -75,7 +80,7 @@ $shadow-color = hsla( black, .1 )
         background white
         color gray
         box-shadow:
-            0 0 0 .5px hsla( black, .2 ) inset,
+            0 0 0 .5px hsla( black, .15 ) inset,
             0 0 $shadow-size 0 transparent
 
         opacity 0
@@ -99,11 +104,11 @@ $shadow-color = hsla( black, .1 )
             text-overflow ellipsis
 
             right 0
-            border-radius 3px 0 0 3px
+            border-radius $border-radius 0 0 $border-radius
             transform translateX( 100% )
 
             {$root}:hover &
-                transform translateX( 1px )
+                transform translateX( 2px )
 
         &_right
             position relative
@@ -111,13 +116,13 @@ $shadow-color = hsla( black, .1 )
             display flex
             align-items center
 
-            border-radius 0 3px 3px 0
+            border-radius 0 $border-radius $border-radius 0
             white-space nowrap
 
-            padding 0 4px
+            padding 0 6px 1px 4px
 
             {$root}:hover &
-                transform translateX( -1px )
+                transform translateX( -2px )
 
     &__link
         display inline-block
@@ -130,7 +135,6 @@ $shadow-color = hsla( black, .1 )
         transition .1s 0s ease-in-out
         transition-property opacity, transform
 
-        //will-change opacity, transform
         backface-visibility hidden
 
         &:hover
@@ -139,9 +143,13 @@ $shadow-color = hsla( black, .1 )
             transition-timing-function ease-in-out, cubic-bezier( .1, 20, .2, 20 )
 
     &__header
+        display flex
+        align-items baseline
         margin-bottom 4px
 
     &__title
+        overflow hidden
+        text-overflow ellipsis
         color black
         font-size inherit
 
@@ -151,7 +159,7 @@ $shadow-color = hsla( black, .1 )
 
     &__year
         margin-left 4px
-        font-size .8em
+        font-size .9em
         color #888
 
     &__rating
@@ -160,13 +168,16 @@ $shadow-color = hsla( black, .1 )
 
         color gray
         text-decoration none
+        border-radius inherit
         box-shadow 0 0 $shadow-size 0 transparent
+        white-space nowrap
 
-        transition box-shadow .07s 0s ease-in-out
+        transition .07s 0s ease-in-out
+        transition-property box-shadow, border-radius
 
         &:hover
             background none
-            color lighten( #888, 5% )
+            color lighten( @color, 5% )
 
         {$root}:hover &
             box-shadow 0 0 $shadow-size 0 $shadow-color
@@ -178,7 +189,7 @@ $shadow-color = hsla( black, .1 )
 
             &:hover
                 background none
-                color lighten( #357920, 5% )
+                color lighten( @color, 10% )
 
         &_bad
 
@@ -187,4 +198,19 @@ $shadow-color = hsla( black, .1 )
 
             &:hover
                 background none
-                color lighten( #ff0b0b, 5% )
+                color lighten( @color, 10% )
+
+
+    &__rating-inner
+        margin 0 2px 0 4px
+
+    &__icon
+        position relative
+        display inline-block
+
+        width 13px
+        height @width
+
+        margin-bottom -2px
+
+        background transparent url( 'chrome-extension://__MSG_@@extension_id__/images/logo_48.png' ) center / 100%

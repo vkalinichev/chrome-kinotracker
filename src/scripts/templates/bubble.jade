@@ -1,11 +1,13 @@
 if data && !data.error
     -var title = data.rus ? data.rus : data.name
-    .kinotracker-bubble
+    .kinotracker-bubble(
+        class= ( data.type !== 'film' ) ? 'kinotracker-bubble_without-links' : null
+    )
         .kinotracker-bubble__info-wrapper.kinotracker-bubble__info-wrapper_left
             a.kinotracker-bubble__info.kinotracker-bubble__info_left( href='#' )
                 span.kinotracker-bubble__header
                     span.kinotracker-bubble__title= title
-                    if data.rus && data.name
+                    //-if data.rus && data.name
                         span.kinotracker-bubble__name (#{ data.name })
                     span.kinotracker-bubble__year= data.year
 
@@ -14,17 +16,20 @@ if data && !data.error
             -if ( data.rating >= 7 ) ratingClass = 'kinotracker-bubble__rating_good'
             -if ( data.rating <= 5 ) ratingClass = 'kinotracker-bubble__rating_bad'
             a.kinotracker-bubble__rating( class=ratingClass href='#' )
-                span= data.rating
+                span.kinotracker-bubble__icon
+                span.kinotracker-bubble__rating-inner= data.rating
 
         else
-            a.kinotracker-bubble__rating O
+            a.kinotracker-bubble__rating( href='#' )
+                span.kinotracker-bubble__icon
 
-        .kinotracker-bubble__info-wrapper.kinotracker-bubble__info-wrapper_right
-            .kinotracker-bubble__info.kinotracker-bubble__info_right
-                each link in links
-                    a.kinotracker-bubble__link(
-                        target="_blank"
-                        href="#{ link.static_url }?nm=#{ title }"
-                        rel="noopener noreferrer"
-                    )
-                        img.kinotracker__img( src="#{link.favicon}" )
+        if data.type === 'film'
+            .kinotracker-bubble__info-wrapper.kinotracker-bubble__info-wrapper_right
+                .kinotracker-bubble__info.kinotracker-bubble__info_right
+                    each link in links
+                        a.kinotracker-bubble__link(
+                            target="_blank"
+                            href="#{ link.static_url }?nm=#{ title }"
+                            rel="noopener noreferrer"
+                        )
+                            img.kinotracker__img( src="#{link.favicon}" )
