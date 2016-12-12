@@ -130,7 +130,7 @@ $border-radius = 12px
         margin 0 2px
 
         &:hover
-            animation .15s bounce10
+            animation .15s bounceMedium
 
     &__header
         display flex
@@ -139,7 +139,7 @@ $border-radius = 12px
         opacity .9
 
         {$root}__info:hover &
-            animation .15s bounce05
+            animation .15s bounceLite
 
     &__title
         overflow hidden
@@ -172,7 +172,7 @@ $border-radius = 12px
         &:hover
             background none
             color lighten( @color, 5% )
-            animation .15s bounce05
+            animation .15s bounceLite
 
         {$root}:hover &
             box-shadow 0 0 $shadow-size 0 $shadow-color
@@ -212,10 +212,10 @@ $border-radius = 12px
 
 
 
-@keyframes bounce05
+@keyframes bounceLite
     33%
-        transform scale( 1.05 )
+        transform scale( 1.033 )
 
-@keyframes bounce10
+@keyframes bounceMedium
     33%
-        transform scale( 1.1 )
+        transform scale( 1.066 )
