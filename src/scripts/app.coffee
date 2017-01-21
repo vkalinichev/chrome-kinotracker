@@ -1,4 +1,5 @@
 { findBestMatch } = require 'string-similarity'
+$ = require 'jquery'
 
 class Kinotracker
 
@@ -20,7 +21,7 @@ class Kinotracker
     initialize: ->
         @loadProperties @properties
         @highlightMarkers()
-        @bindEvents()
+        # @bindEvents()
 
     render: (data)->
         @el.append @template data
@@ -29,7 +30,7 @@ class Kinotracker
         template = @bubbleTemplate
         links = @links
 
-        document.addEventListener "mouseup", ->
+        document.addEventListener "m1o1useup", ->
             needle = window.getSelection().toString()
             selectedRange = window.getSelection().getRangeAt( 0 ).cloneRange()
             if selectedRange.endOffset - selectedRange.startOffset <= 3  then return
@@ -56,9 +57,7 @@ class Kinotracker
 
                     onClickOutside = ->
                         document.removeEventListener "mousedown", onClickOutside
-                        setTimeout ->
-                            $bubble.remove()
-                        , 0
+                        setTimeout (-> $bubble.remove()), 1000
 
                     document.addEventListener "mousedown", onClickOutside
 
