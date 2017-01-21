@@ -56,12 +56,12 @@ gulp.task "styles", ->
     
 gulp.task "templates", ->
     gulp.src [
-        "./src/templates/background.jade"
-        "./src/templates/options.jade"
-        "./src/templates/popup.jade"
+        "./src/templates/background.pug"
+        "./src/templates/options.pug"
+        "./src/templates/popup.pug"
     ]
         .pipe $.plumber errorHandler
-        .pipe $.jade { pretty: false }
+        .pipe $.pug { pretty: false }
         .pipe gulp.dest config.build
 
 
@@ -148,7 +148,7 @@ gulp.task "upload", ->
 # Watch #
 
 gulp.task "watch", ->
-    gulp.watch "./src/{icons,templates,scripts}/**/*.{jade,svg}", ["templates"]
+    gulp.watch "./src/{icons,templates,scripts}/**/*.{pug,svg}", ["templates"]
     gulp.watch "./src/scripts/**/*", ["scripts"]
     gulp.watch "./src/{icons,styles}/**/*", ["styles"]
     gulp.watch "./src/images/**/*", ["images"]

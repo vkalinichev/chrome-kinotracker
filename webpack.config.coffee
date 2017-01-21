@@ -12,17 +12,17 @@ module.exports =
     module:
         loaders: [
             test: /\.coffee$/
-            loader: "coffee-loader"
+            loader: "coffee"
         ,
-            test: /\.jade$/
-            loader: "jade-loader"
+            test: /\.pug$/
+            loader: "pug"
         ]
 
     resolve:
         extensions: [
             ""
             ".coffee"
-            ".jade"
+            ".pug"
             ".js"
         ]
 

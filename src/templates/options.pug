@@ -1,5 +1,7 @@
-include ../../node_modules/bemto.jade/bemto
+include ../../node_modules/bemto.pug/bemto.pug
+
 doctype
+
 html
 
     head
@@ -11,9 +13,11 @@ html
         block optional_head
 
     body.options#options
+
         +e.header
-            +e.A.logo( href="http://www.kinopoisk.ru" rv-title="'GoToKinopoisk' | localize" target='_blank' )
+            +e.A.logo( href="https://www.kinopoisk.ru" rv-title="'GoToKinopoisk' | localize" target='_blank' rel='noopener noreferrer' )
                 include ../icons/logo-kinotracker-big.svg
+
         +e.list
             +e.item
                 +e.LABEL.label { 'SortResults' | localize } { 'SortBy' | localize }
@@ -27,8 +31,8 @@ html
                         +e.BUTTON.item( value="4" ) { 'SortByDownloads' | localize }
                         +e.BUTTON.item( value="7" ) { 'SortBySize' | localize }
 
-                +e.LABEL.label
-                    +b.BUTTON.toggler.toggler( rv-title="model.sortOrderKey | localize" )
+                //-+e.LABEL.label
+                +b.BUTTON.toggler.toggler( rv-title="model.sortOrderKey | localize" )
 
             +e.item
                 +b.LABEL.checkbox
@@ -40,7 +44,7 @@ html
                     +e.label_optional :
 
             +e.item
-                +e.INPUT.input( type='text' rv-placeholder="'TagsPlaceholder' | localize" )
+                +e.INPUT.input( type='text' rv-placeholder="'TagsPlaceholder' | localize" title='' )
 
         +e.buttons
             +b.BUTTON.button_primary { 'Save' | localize }
