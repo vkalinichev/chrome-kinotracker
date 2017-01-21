@@ -443,12 +443,6 @@ character-parser@^2.1.1:
   dependencies:
     is-regex "^1.0.3"
 
-childprocess@~2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/childprocess/-/childprocess-2.0.2.tgz#3d684929748b1e13e8521cf619bde5440de85eb4"
-  dependencies:
-    utility "~1.6.0"
-
 chokidar@^1.0.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.6.1.tgz#2f4447ab5e96e50fb3d789fd90d4c72e0e4c70c2"
@@ -526,13 +520,6 @@ coffee-loader@^0.7.2:
 coffee-script@^1.12.2:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.12.2.tgz#0d4cbdee183f650da95419570c4929d08ef91376"
-
-coffee@^3.2.1:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/coffee/-/coffee-3.3.0.tgz#3cd8ec513427b4b301573caa0640c031172ae4f6"
-  dependencies:
-    childprocess "~2.0.0"
-    debug "~2.2.0"
 
 colors@~1.1.2:
   version "1.1.2"
@@ -639,10 +626,6 @@ cookie-signature@1.0.6:
 cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
-
-copy-to@~2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/copy-to/-/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -1612,13 +1595,6 @@ gulp-rename@^1.2.0, gulp-rename@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
 
-gulp-sequence@^0.4.5:
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/gulp-sequence/-/gulp-sequence-0.4.6.tgz#e388d64311046e05547af43035352d9495501c50"
-  dependencies:
-    gulp-util ">=3.0.0"
-    thunks "^4.5.1"
-
 gulp-sourcemaps@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/gulp-sourcemaps/-/gulp-sourcemaps-1.6.0.tgz#b86ff349d801ceb56e1d9e7dc7bbcb4b7dee600c"
@@ -1664,7 +1640,7 @@ gulp-util@*, gulp-util@^3.0.8:
     through2 "^2.0.0"
     vinyl "^0.5.0"
 
-gulp-util@^3, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.2, gulp-util@^3.0.6, gulp-util@^3.0.7, gulp-util@>=3.0.0:
+gulp-util@^3, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.2, gulp-util@^3.0.6, gulp-util@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.7.tgz#78925c4b8f8b49005ac01a011c557e6218941cbb"
   dependencies:
@@ -3885,10 +3861,6 @@ through2@^2, through2@^2.0.0, through2@^2.0.1, through2@~2.0.0:
     readable-stream "~2.0.0"
     xtend "~4.0.0"
 
-thunks@^4.5.1:
-  version "4.7.5"
-  resolved "https://registry.yarnpkg.com/thunks/-/thunks-4.7.5.tgz#e440b45344183e88b8e878787cf22bfa8d67ade6"
-
 tildify@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/tildify/-/tildify-1.2.0.tgz#dcec03f55dca9b7aa3e5b04f21817eb56e63588a"
@@ -4057,13 +4029,6 @@ util@~0.10.3, util@0.10.3:
   resolved "https://registry.yarnpkg.com/util/-/util-0.10.3.tgz#7afb1afe50805246489e3db7fe0ed379336ac0f9"
   dependencies:
     inherits "2.0.1"
-
-utility@~1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/utility/-/utility-1.6.0.tgz#e5bfb6a783a9c392b9fe70fe45c67fc24405c7e9"
-  dependencies:
-    copy-to "~2.0.1"
-    escape-html "~1.0.3"
 
 utils-merge@1.0.0:
   version "1.0.0"
