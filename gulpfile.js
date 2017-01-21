@@ -33,11 +33,10 @@ gulp.task( 'set-production', cb => {
     cb()
 })
 
-
 gulp.task( "default", ["build", "watch"] )
 
 gulp.task( "build", cb => {
-    sequence( "clean", [ "styles", "scripts", "images", "templates", "copy:resources" ], "zip" )
+    sequence( "clean", [ "styles", "scripts", "images", "templates" ], "zip" )
     cb()
 })
 
@@ -46,7 +45,9 @@ gulp.task( "release", cb => {
     cb()
 } )
 
-gulp.task( "clean", () => del( config.build ))
+gulp.task( "clean", () =>
+    del( path.join( config.build, '*.{css,html,js,map}' ) )
+)
 
 gulp.task( "styles", () =>
     gulp.src( "./src/styles/*.styl" )
@@ -62,19 +63,7 @@ gulp.task( "templates", () =>
         .pipe( gulp.dest( config.build ))
 )
 
-gulp.task( "copy", [ "copy:locales", "copy:resources" ] )
-
-gulp.task( "copy:locales", () =>
-    gulp.src( "./src/_locales/**/*" )
-        .pipe( gulp.dest( path.join( config.build, "_locales" )))
-)
-
-gulp.task( "copy:resources", () =>
-    gulp.src( "./src/*.json" )
-        .pipe( gulp.dest( config.build ))
-)
-
-gulp.task( "scripts", ["copy"], () =>
+gulp.task( "scripts", () =>
     gulp.src( "./src/scripts/*.coffee" )
         .pipe( plumber( errorHandler ))
         .pipe( named() )
@@ -97,7 +86,7 @@ gulp.task( "bump:package.json", () =>
 )
 
 gulp.task( "bump:manifest.json", () =>
-    gulp.src( "./src/manifest.json" )
+    gulp.src( path.join( config.build, "manifest.json" ))
         .pipe( bump() )
         .pipe( gulp.dest( "./src/" ))
 )
@@ -131,6 +120,4 @@ gulp.task( "watch", () => {
     gulp.watch( "./src/scripts/**/*", [ "scripts" ] )
     gulp.watch( "./src/{icons,styles}/**/*", [ "styles" ] )
     gulp.watch( "./src/images/**/*", [ "images" ] )
-    gulp.watch( "./src/*.json", [ "copy:resources" ] )
-    gulp.watch( "./src/_locales/**/*", [ "copy:locales" ] )
 })

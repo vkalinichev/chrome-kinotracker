@@ -3,10 +3,13 @@
 .src
 .build
 .deploy
-build
+extension/*.css
+extension/*.html
+extension/*.js
 release
 
 *.log
+*.map
 
 config/local.*
 node_modules

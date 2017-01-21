@@ -18,7 +18,7 @@
     }
     ],
     "background": {
-        "page": "background.html"
+        "script": "background.js"
     },
     "icons": {
         "48": "images/logo_48.png",

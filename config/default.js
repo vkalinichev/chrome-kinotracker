@@ -2,7 +2,7 @@ module.exports = {
 
     appname: 'kinotracker',
 
-    build: './build',
+    build: './extension',
     release: './release'
 
 //    webstoreAccount: {
