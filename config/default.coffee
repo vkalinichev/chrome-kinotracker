@@ -1,9 +1,6 @@
-pkg = require '../package'
-_s = require 'underscore.string'
-
 module.exports =
 
-    appname: _s.dasherize pkg.name
+    appname: 'kinotracker'
 
     build: './build'
     release: './release'

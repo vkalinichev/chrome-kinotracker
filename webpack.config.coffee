@@ -3,7 +3,8 @@ path = require 'path'
 webpackStream = require 'webpack-stream'
 webpack = webpackStream.webpack
 
-module.exports =
+module.exports = ( { production } ) ->
+
     context: path.join __dirname, "/src/scripts"
 
     output:
@@ -26,8 +27,9 @@ module.exports =
             ".js"
         ]
 
-    plugins: [
-#        new webpack.optimize.UglifyJsPlugin()
-    ]
+    plugins: if production
+        [ new webpack.optimize.UglifyJsPlugin() ]
+    else
+        []
 
-    devtool: 'source-map'
+    devtool: if production then null else "source-map"

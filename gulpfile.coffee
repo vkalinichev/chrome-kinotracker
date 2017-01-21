@@ -1,44 +1,58 @@
-gulp = require "gulp"
-del = require "del"
 path = require "path"
-WebStore = require "chrome-webstore-upload"
+del = require "del"
 fs = require "fs"
-_s = require "underscore.string"
 
-named = require "vinyl-named"
-
-$ = require("gulp-load-plugins")()
+gulp = require "gulp"
+pug = require "gulp-pug"
+zip = require "gulp-zip"
 config = require "config"
-
+bump = require "gulp-bump"
+named = require "vinyl-named"
+rename = require "gulp-rename"
+stylus = require "gulp-stylus"
+plumber = require "gulp-plumber"
+postcss = require "gulp-postcss"
+sequence = require "run-sequence"
+imagemin = require "gulp-imagemin"
 webpackStream = require "webpack-stream"
+WebStore = require "chrome-webstore-upload"
+
 webpackConfig = require "./webpack.config"
 
-postcssImportanter = require "postcss-importanter"
+
+__PROD__ = false
+
 
 errorHandler = (error)->
     console.error error.message, error.stack
 
+pad2 = ( month ) -> if month < 10 then "0" + month else month
+
 zipName = ->
-    date = new Date
-    "#{ date.getFullYear() }-#{ _s.pad date.getMonth()+1, 2, "0" }-#{ date.getDate() }.zip"
+    now = new Date
+    "#{ now.getFullYear() }-#{ pad2 now.getMonth()+1 }-#{ now.getDate() }.zip"
 
 
+gulp.task "set-production", ( cb ) ->
+    __PROD__ = true
+    cb()
 
-# Main Aliases #
 
 gulp.task "default", ["build", "watch"]
 
-gulp.task "build", $.sequence "clean", [ "styles", "scripts", "images", "templates", "copy:resources" ], "zip"
+gulp.task "build", ( cb ) ->
+    sequence "clean", [ "styles", "scripts", "images", "templates", "copy:resources" ], "zip"
+    cb()
 
-gulp.task "release", $.sequence "bump", "build", "upload"
-
+gulp.task "release", ( cb ) ->
+    sequence "set-production", "bump", "build", "upload"
+    cb()
 
 
 # Prepares #
 
 gulp.task "clean", ->
     del config.build
-
 
 
 # Build and copying #
@@ -49,19 +63,19 @@ gulp.task "styles", ->
         "./src/styles/options.styl"
         "./src/styles/popup.styl"
     ]
-        .pipe $.plumber errorHandler
-        .pipe $.stylus { compress: true }
-        # .pipe $.postcss [ postcssImportanter ]
+        .pipe plumber errorHandler
+        .pipe stylus { compress: __PROD__ }
         .pipe gulp.dest config.build
     
+
 gulp.task "templates", ->
     gulp.src [
         "./src/templates/background.pug"
         "./src/templates/options.pug"
         "./src/templates/popup.pug"
     ]
-        .pipe $.plumber errorHandler
-        .pipe $.pug { pretty: false }
+        .pipe plumber errorHandler
+        .pipe pug { pretty: !__PROD__ }
         .pipe gulp.dest config.build
 
 
@@ -90,59 +104,52 @@ gulp.task "scripts", ["copy"], ->
         "./src/scripts/background.coffee"
         "./src/scripts/options.coffee"
     ]
-        .pipe $.plumber errorHandler
+        .pipe plumber errorHandler
         .pipe named()
-        .pipe webpackStream webpackConfig
+        .pipe webpackStream webpackConfig( { production: __PROD__ } )
         .pipe gulp.dest config.build
 
 
 gulp.task "images", ->
     gulp.src "./src/images/**/*"
-        .pipe $.imagemin()
+        .pipe imagemin()
         .pipe gulp.dest path.join config.build, "images"
-
 
 
 # Release #
 
 gulp.task "bump", [ "bump:package.json", "bump:manifest.json"]
 
-
 gulp.task "bump:package.json", ->
     gulp.src "package.json"
-        .pipe $.bump()
+        .pipe bump()
         .pipe gulp.dest "./"
-
 
 gulp.task "bump:manifest.json", ->
     gulp.src "./src/manifest.json"
-        .pipe $.bump()
+        .pipe bump()
         .pipe gulp.dest "./src/"
-
 
 gulp.task "zip", ->
     gulp.src path.join config.build, "**/*.{json,css,js,html,jpg,jpeg,png,gif}"
-        .pipe $.zip zipName()
+        .pipe zip zipName()
         .pipe gulp.dest config.release
+
 
 gulp.task "upload", ->
     filename = path.join config.release, zipName()
     zipStream = fs.createReadStream filename
 
-    webStore = WebStore config.webstoreAccount
-    webStore
+    WebStore config.webstoreAccount
         .uploadExisting( zipStream )
-
         .then ( response )->
             if response?[ "uploadState" ] is "SUCCESS"
                 console.log "Upload success"
             else
                 console.error "Upload failed"
-
         .catch ( response )->
             console.error "Upload failed:"
             console.log response
-
 
 
 # Watch #

@@ -13,7 +13,6 @@
             "kinotracker.css"
         ],
         "js": [
-            "jquery.min.js",
             "app.js"
         ]
     }
