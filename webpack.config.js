@@ -15,13 +15,12 @@ module.exports = ( { production } ) => ({
 
     module: {
         loaders: [
-            { test: /\.coffee$/, loader: "coffee" },
             { test: /\.pug$/, loader: "pug" }
         ]
     },
 
     resolve: {
-        extensions: [ "", ".coffee", ".pug", ".js" ]
+        extensions: [ "", ".pug", ".js" ]
     },
 
     plugins: production ? [ new webpack.optimize.UglifyJsPlugin() ] : [],

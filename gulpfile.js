@@ -64,7 +64,7 @@ gulp.task( "templates", () =>
 )
 
 gulp.task( "scripts", () =>
-    gulp.src( "./src/scripts/*.coffee" )
+    gulp.src( "./src/scripts/*.js" )
         .pipe( plumber( errorHandler ))
         .pipe( named() )
         .pipe( webpackStream( webpackConfig({ production: __PROD__ })))
